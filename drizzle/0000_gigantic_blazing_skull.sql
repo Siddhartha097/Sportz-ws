@@ -21,8 +21,8 @@ CREATE TABLE "matches" (
 	"home_team" varchar(255) NOT NULL,
 	"away_team" varchar(255) NOT NULL,
 	"status" "match_status" DEFAULT 'scheduled' NOT NULL,
-	"start_time" timestamptz,
-	"end_time" timestamptz,
+	"start_time" timestamptz NOT NULL,
+	"end_time" timestamptz NOT NULL,
 	"home_score" integer DEFAULT 0 NOT NULL,
 	"away_score" integer DEFAULT 0 NOT NULL,
 	"created_at" timestamptz DEFAULT now() NOT NULL
