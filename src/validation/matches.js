@@ -12,7 +12,7 @@ export const MATCH_STATUS = {
 /**
  * Helper: ISO Date Validation
  */
-const isoDateString = z.string().refine((val) => !isNaN(Date.parse(val)), {
+const isoDateString = z.iso.datetime({
     message: "Invalid ISO date string",
 });
 

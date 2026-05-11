@@ -12,7 +12,7 @@ CREATE TABLE "commentary" (
 	"message" text NOT NULL,
 	"metadata" jsonb,
 	"tags" text[],
-	"created_at" timestamp DEFAULT now() NOT NULL
+	"created_at" timestamptz DEFAULT now() NOT NULL
 );
 
 CREATE TABLE "matches" (
@@ -21,11 +21,11 @@ CREATE TABLE "matches" (
 	"home_team" varchar(255) NOT NULL,
 	"away_team" varchar(255) NOT NULL,
 	"status" "match_status" DEFAULT 'scheduled' NOT NULL,
-	"start_time" timestamp,
-	"end_time" timestamp,
+	"start_time" timestamptz,
+	"end_time" timestamptz,
 	"home_score" integer DEFAULT 0 NOT NULL,
 	"away_score" integer DEFAULT 0 NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL
+	"created_at" timestamptz DEFAULT now() NOT NULL
 );
 
 ALTER TABLE "commentary" ADD CONSTRAINT "commentary_match_id_matches_id_fk" FOREIGN KEY ("match_id") REFERENCES "public"."matches"("id") ON DELETE cascade ON UPDATE no action;

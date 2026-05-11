@@ -34,8 +34,8 @@ matchRouter.get("/", async (req, res) => {
         res.json({ data });
     } catch (error) {
         res.status(500).json({
-            error: "Failed to create match",
-            message: "A database error occurred while saving the match.",
+            error: "Failed to list matches",
+            message: "A database error occurred while fetching matches.",
         });
     }
 });
@@ -45,7 +45,7 @@ matchRouter.post("/", async (req, res) => {
 
     if (!parsed.success) {
         return res.status(400).json({
-            error: "Failed to list matches",
+            error: "Invalid match payload",
             details: parsed.error.format(),
         });
     }
