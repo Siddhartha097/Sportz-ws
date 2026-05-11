@@ -1,5 +1,4 @@
-CREATE TYPE "public"."match_status" AS ENUM('scheduled', 'live', 'finished');--> statement-breakpoint
-CREATE TABLE "commentary" (
+CREATE TYPE "public"."match_status" AS ENUM('scheduled', 'live', 'finished');
 	"id" serial PRIMARY KEY NOT NULL,
 	"match_id" integer NOT NULL,
 	"minute" integer,
@@ -13,7 +12,7 @@ CREATE TABLE "commentary" (
 	"tags" text[],
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
---> statement-breakpoint
+
 CREATE TABLE "matches" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"sport" varchar(50) NOT NULL,
@@ -26,8 +25,8 @@ CREATE TABLE "matches" (
 	"away_score" integer DEFAULT 0 NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
---> statement-breakpoint
-ALTER TABLE "commentary" ADD CONSTRAINT "commentary_match_id_matches_id_fk" FOREIGN KEY ("match_id") REFERENCES "public"."matches"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-CREATE INDEX "match_timeline_idx" ON "commentary" USING btree ("match_id","sequence");--> statement-breakpoint
-CREATE INDEX "status_idx" ON "matches" USING btree ("status");--> statement-breakpoint
+
+ALTER TABLE "commentary" ADD CONSTRAINT "commentary_match_id_matches_id_fk" FOREIGN KEY ("match_id") REFERENCES "public"."matches"("id") ON DELETE cascade ON UPDATE no action;
+CREATE INDEX "match_timeline_idx" ON "commentary" USING btree ("match_id","sequence");
+CREATE INDEX "status_idx" ON "matches" USING btree ("status");
 CREATE INDEX "sport_idx" ON "matches" USING btree ("sport");
