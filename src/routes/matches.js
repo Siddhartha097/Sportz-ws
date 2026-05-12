@@ -65,6 +65,9 @@ matchRouter.post("/", async (req, res) => {
             })
             .returning();
 
+        if (typeof res.app.locals.broadcastMatchCreated === "function") {
+            res.app.locals.broadcastMatchCreated(event);
+        }
         res.status(201).json({ data: event });
     } catch (error) {
         console.error("Database Insert Error:", error);
