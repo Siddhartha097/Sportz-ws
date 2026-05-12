@@ -11,11 +11,19 @@ function sendJson(socket, payload) {
 }
 
 function broadcast(wss, payload) {
+    let message;
+    try {
+        message = JSON.stringify(payload);
+    } catch (error) {
+        console.error("Failed to serialize broadcast payload:", error);
+        return;
+    }
+
     for (const client of wss.clients) {
         if (client.readyState !== WebSocket.OPEN) continue;
 
         try {
-            client.send(JSON.stringify(payload));
+            client.send(message);
         } catch (error) {
             console.error("Failed to broadcast message:", error);
         }

@@ -65,10 +65,18 @@ matchRouter.post("/", async (req, res) => {
             })
             .returning();
 
-        if (typeof res.app.locals.broadcastMatchCreated === "function") {
-            res.app.locals.broadcastMatchCreated(event);
-        }
+        // if (typeof res.app.locals.broadcastMatchCreated === "function") {
+        //     res.app.locals.broadcastMatchCreated(event);
+        // }
         res.status(201).json({ data: event });
+
+        if (typeof res.app.locals.broadcastMatchCreated === "function") {
+            try {
+                res.app.locals.broadcastMatchCreated(event);
+            } catch (error) {
+                console.error("Broadcast Error:", error);
+            }
+        }
     } catch (error) {
         console.error("Database Insert Error:", error);
         res.status(500).json({
