@@ -12,7 +12,7 @@ export const MATCH_STATUS = {
 /**
  * Helper: ISO Date Validation
  */
-const isoDateString = z.iso.datetime({
+const isoDateString = z.string().datetime({
     error: "Invalid ISO date string",
 });
 
